@@ -5,7 +5,7 @@ Client = discord.Client()
 
 initial_extensions = ['admin', 'moderation', 'misc']
 
-File = open('/Users/duckmasteral/Documents/GitHub/discord-bot-shop/info.json', 'r').read()# You may need to put the full path to the file here.
+File = open('info.json', 'r').read()# You may need to put the full path to the file here.
 data = json.loads(File)
 botid = data['botid']
 
@@ -41,5 +41,7 @@ async def on_command_error(ctx, error):
         await ctx.send(f'**:bangbang: ERROR :bangbang:**\nYou do not have the required permissions to do that command.\nMissing Permission: `{error.missing_perms}`')
     elif isinstance(error, commands.BotMissingPermissions):
         await ctx.send(f'**:bangbang: ERROR :bangbang:**\nI do not have the required permissions to do that command.\nMissing Permission: `{error.missing_perms}`')
+    else:
+        await ctx.send(f'**:bangbang: ERROR :bangbang:**\n{error}\n*This seems to be an error with the code. Please contact the bot owner about this!*')
 
 client.run(data['token'])

@@ -38,6 +38,7 @@ class Admin(commands.Cog):
     async def reload(self, ctx):
         self.bot.reload_extension('admin')
         self.bot.reload_extension('misc')
+        self.bot.reload_extension('moderation')
         await ctx.channel.last_message.add_reaction('\U00002705')
         print('---- -- ---- -- -- --')
 
@@ -54,20 +55,24 @@ class Admin(commands.Cog):
     async def dm(self, ctx, user, *, message):
         """ Makes the Bot DM Someone. """
         user1 = user
-        if user.__contains__('<') and user.__contains__('>') and user.__contains__('@'):
+        user2 = user
+        if user.__contains__('<') and user.__contains__('>') and user.__contains__('@'): # If User is Mentioned
             user1 = user.replace('<', '')
             user1 = user1.replace('>', '')
             user1 = user1.replace('@', '')
             user1 = user1.replace('!', '')
             try:
-                user1 = self.bot.get_user(int(user1))
+                user1 = ctx.guild.get_member(int(user1))
             except:
-                pass
+                user1 = None
         else:
+            user1 = discord.utils.get(ctx.guild.members, name=user) # Else Just Search
+
+        if user2 == user and user1 == None: # If search fails, search via userid
             try:
-                user1 = self.bot.get_user(int(user))
+                user1 = ctx.guild.get_member(int(user))
             except:
-                pass
+                user1 = None
 
         if user1 is None:
             return await ctx.send(f'**:bangbang: ERROR :bangbang:**\nI cannot find that user!')
