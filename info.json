@@ -1,7 +1,7 @@
 {
   "token": "TOKEN",
   "help_message": "Hi, This is my Help Command! My Commands are Below :D",
-  "botid": null,
+  "botid": "123",
   "prefix": "!",
   "supportserver": null,
 }

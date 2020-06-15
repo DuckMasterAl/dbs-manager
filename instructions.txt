@@ -1,0 +1,29 @@
+Hey! Thanks for purchasing a bot at the Discord Bot Shop!
+Here's information on how to setup your bot.
+
+----------------------
+Getting a Bot Account
+----------------------
+If you already have a bot account, skip this. Otherwise, read here on how to make a bot account --> https://discordpy.readthedocs.io/en/latest/discord.html
+
+----------------------------
+Changing the Bot's Settings
+----------------------------
+Here is what the different things in the "info.json" file mean. To configure them just change the text in quotes.
+1. token - Put your bot's Token Here.
+2. help_message - This message is at the Top of the Help Command.
+3. botid - Put your bot's userid here.
+4. prefix - Put your bot's prefix here. Mentioning the bot is always a prefix
+5. supportserver - Put your discord support server here (Not Required). Make sure to put it in quotes.
+
+-----------------------
+Getting the Bot Online
+-----------------------
+1. Get Python on your Computer (If you already have Python Installed, make sure it is Version 3.5.3 or Higher.)
+- You can download Python Here: https://www.python.org/downloads/ Make sure to select the "ADD TO PATH" option on the installer window.
+2. Install the discord.py Module.
+- Windows Users: Open Command Prompt and Type "py -3 -m pip install -U discord.py"
+- Mac Users: Open Terminal and Type "python3 -m pip install -U discord.py"
+- You may need to put in your password to install.
+3. Run Your Bot.
+- Open the "bot.py" file in this folder. The bot should go online.
