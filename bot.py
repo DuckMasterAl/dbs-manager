@@ -29,4 +29,17 @@ async def on_ready():
     # (activity=discord.Activity(type=discord.ActivityType.watching, name="a movie"))
     print(f'Logged in as "{client.user.name}".\nPrefix:', data['prefix'])
 
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        pass
+    elif isinstance(error, commands.MissingRequiredArgument) or isinstance(error, commands.ExtensionNotLoaded) or isinstance(error, commands.ExtensionAlreadyLoaded) or isinstance(error, commands.ExtensionFailed) or isinstance(error, commands.ExtensionNotFound) or isinstance(error, commands.CommandOnCooldown):
+        await ctx.send(f'**:bangbang: ERROR :bangbang:**\n{error}')
+    elif isinstance(error, commands.NoPrivateMessage):
+        await ctx.send('**:bangbang: ERROR :bangbang:**\nThis command cannot be used in DMs!')
+    elif isinstance(error, commands.MissingPermissions):
+        await ctx.send(f'**:bangbang: ERROR :bangbang:**\nYou do not have the required permissions to do that command.\nMissing Permission: `{error.missing_perms}`')
+    elif isinstance(error, commands.BotMissingPermissions):
+        await ctx.send(f'**:bangbang: ERROR :bangbang:**\nI do not have the required permissions to do that command.\nMissing Permission: `{error.missing_perms}`')
+
 client.run(data['token'])

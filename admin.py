@@ -1,4 +1,4 @@
-import discord, json
+import discord
 from discord.ext import commands
 
 class Admin(commands.Cog):
@@ -34,8 +34,10 @@ class Admin(commands.Cog):
             await ctx.channel.last_message.add_reaction('\U00002705')
 
     @commands.command()
+    @commands.is_owner()
     async def reload(self, ctx):
         self.bot.reload_extension('admin')
+        self.bot.reload_extension('misc')
         await ctx.channel.last_message.add_reaction('\U00002705')
         print('---- -- ---- -- -- --')
 
@@ -57,7 +59,10 @@ class Admin(commands.Cog):
             user1 = user1.replace('>', '')
             user1 = user1.replace('@', '')
             user1 = user1.replace('!', '')
-            user1 = self.bot.get_user(int(user1))
+            try:
+                user1 = self.bot.get_user(int(user1))
+            except:
+                pass
         else:
             try:
                 user1 = self.bot.get_user(int(user))
@@ -68,9 +73,30 @@ class Admin(commands.Cog):
             return await ctx.send(f'**:bangbang: ERROR :bangbang:**\nI cannot find that user!')
         try:
             await user1.send(message)
-            await ctx.send(f"<:fancycheck:681610286444314668> Sent a DM to **{user1}**")
+            await ctx.send(f":white_check_mark: Sent a DM to **{user1}**")
         except discord.Forbidden:
             await ctx.send('**:bangbang: ERROR :bangbang:**\nI am unable to DM that user.')
+
+    @commands.command()
+    @commands.is_owner()
+    async def status(self, ctx, activity, *, status):
+        """ Changes the bot's playing status. """
+        if activity == 'playing' or activity == 'game':
+            await self.bot.change_presence(activity=discord.Game(type=0, name=status), status=discord.Status.online)
+            game = 'Playing'
+        elif activity == 'listen' or activity == 'listening':
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status), status=discord.Status.online)
+            game = 'Listening To'
+        elif activity == 'watching' or activity == 'watch':
+            await self.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status), status=discord.Status.online)
+            game = 'Watching'
+        elif activity == 'stream' or activity == 'streaming' or activity == 'twitch':
+            await self.bot.change_presence(activity=discord.Streaming(name='on Twitch', url=status), status=discord.Status.online)
+            game = 'Streaming'
+        else:
+            return await ctx.send(f'**:bangbang: ERROR :bangbang:\nactivity must be one of the following:\n> playing\n> listening\n> watching\n> streaming')
+        safe_status = discord.utils.escape_markdown(status, as_needed=True, ignore_links=True)
+        await ctx.send(f"<:check:678014104111284234> Successfully changed the bot's status to **{game} {safe_status}**")
 
 def setup(bot):
     bot.add_cog(Admin(bot))
