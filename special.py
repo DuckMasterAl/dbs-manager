@@ -114,7 +114,7 @@ class Special(commands.Cog):
             return
         ticket_owner = ctx.channel.topic
         ticket_owner = ticket_owner.replace('USERID: ', '')
-        archive = ctx.guild.get_channel(711227298157953035)
+        archive = ctx.guild.get_channel(722556607267078214)
         tuser = self.bot.get_user(int(ticket_owner))
         dvhelper = ctx.guild.get_role(519482266473332736)
         member = ctx.guild.get_member(ctx.author.id)
