@@ -2,3 +2,4 @@
 *.pyc
 token.txt
 .DS_Store
+info.json
