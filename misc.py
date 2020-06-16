@@ -16,14 +16,14 @@ class Misc(commands.Cog):
     @commands.command()
     async def invite(self, ctx):
         """ Invite the Bot to your Server! """
-        File = open('info.json', 'r').read()# You may need to put the full path to the file here.
+        File = open('/root/Bot_Shop/info.json', 'r').read()# You may need to put the full path to the file here.
         data = json.loads(File)
         await ctx.send(f'You can invite the bot here:\nhttps://discordapp.com/oauth2/authorize?client_id='+data['botid']+'&scope=bot&permissions=339014')
 
     @commands.command()#enabled=False)
     async def support(self, ctx):
         """ Join the Bot's Official Support Server! """
-        File = open('info.json', 'r').read()# You may need to put the full path to the file here.
+        File = open('/root/Bot_Shop/info.json', 'r').read()# You may need to put the full path to the file here.
         data = json.loads(File)
         if data['supportserver'] is None:
             await ctx.send(f':x: The Bot Owner has Not Added an Official Support Server!')

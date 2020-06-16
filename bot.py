@@ -5,7 +5,7 @@ Client = discord.Client()
 
 initial_extensions = ['admin', 'moderation', 'misc', 'special']
 
-File = open('info.json', 'r').read()# You may need to put the full path to the file here.
+File = open('/root/Bot_Shop/info.json', 'r').read()# You may need to put the full path to the file here.
 data = json.loads(File)
 botid = data['botid']
 
@@ -19,7 +19,7 @@ if __name__ == '__main__':
         try:
             client.load_extension(extension)
         except Exception as e:
-            print(f'{extension} could not be loaded!\n{type(e).__name__}: {e}')
+            print(f'Bot Shop: {extension} could not be loaded!\n{type(e).__name__}: {e}')
 
 @client.event
 async def on_ready():
@@ -27,7 +27,7 @@ async def on_ready():
     # (activity=discord.Streaming(name="My Stream", url=my_twitch_url))
     # (activity=discord.Activity(type=discord.ActivityType.listening, name="a song"))
     # (activity=discord.Activity(type=discord.ActivityType.watching, name="a movie"))
-    print(f'Logged in as "{client.user.name}".\nPrefix:', data['prefix'])
+    print(f'"{client.user.name}" is ready to use.')
 
 @client.event
 async def on_command_error(ctx, error):
@@ -41,6 +41,8 @@ async def on_command_error(ctx, error):
         await ctx.send(f'**:bangbang: ERROR :bangbang:**\nYou do not have the required permissions to do that command.\nMissing Permission: `{error.missing_perms}`')
     elif isinstance(error, commands.BotMissingPermissions):
         await ctx.send(f'**:bangbang: ERROR :bangbang:**\nI do not have the required permissions to do that command.\nMissing Permission: `{error.missing_perms}`')
+    elif isinstance(error, commands.CheckFailure):
+        await ctx.send(':x: You don\'t have permission to do this command!')
     else:
         await ctx.send(f'**:bangbang: ERROR :bangbang:**\n{error}\n*This seems to be an error with the code. Please contact the bot owner about this!*')
 
