@@ -92,7 +92,7 @@ class Admin(commands.Cog):
         else:
             return await ctx.send(f'**:bangbang: ERROR :bangbang:\nactivity must be one of the following:\n> playing\n> listening\n> watching\n> streaming')
         safe_status = discord.utils.escape_markdown(status, as_needed=True, ignore_links=True)
-        await ctx.send(f"<:check:678014104111284234> Successfully changed the bot's status to **{game} {safe_status}**")
+        await ctx.send(f":white_check_mark: Successfully changed the bot's status to **{game} {safe_status}**")
 
 def setup(bot):
     bot.add_cog(Admin(bot))
