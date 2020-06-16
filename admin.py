@@ -35,15 +35,6 @@ class Admin(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def reload(self, ctx):
-        self.bot.reload_extension('admin')
-        self.bot.reload_extension('misc')
-        self.bot.reload_extension('moderation')
-        await ctx.channel.last_message.add_reaction('\U00002705')
-        print('---- -- ---- -- -- --')
-
-    @commands.command()
-    @commands.is_owner()
     async def shutdown(self, ctx):
         """ Shutdown the Bot. """
         await ctx.send('Ok, Shutting down now. Bye!')
