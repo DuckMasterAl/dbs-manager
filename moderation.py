@@ -137,16 +137,28 @@ class Moderation(commands.Cog):
                     fail = True
 
             if fail == True:
-                return await ctx.send(f'**:bangbang: ERROR :bangbang:**\namount is a required argument that is missing.')
+                return await ctx.send('**:bangbang: ERROR :bangbang:**\namount is a required argument that is missing.')
             else:
+                try:
+                    int(channel)
+                    int(amount)
+                except:
+                    return await ctx.send('**:bangbang: ERROR :bangbang:**\nThat is not a valid number!')
                 amount_to_purge = int(amount) + 1
-                await channel1.purge(limit=amount_to_purge)
+                try:
+                    await channel1.purge(limit=amount_to_purge)
+                except Exception as e:
+                    return await ctx.send(f'**:bangbang: ERROR :bangbang:**\n{e}')
                 if int(amount) == 1:
                     s = ' in'
                 else:
                     s = 's in'
                 await ctx.send(f':white_check_mark: Purged {amount} message{s} {channel1.mention}!', delete_after=1.5)
         else:
+            try:
+                int(channel)
+            except:
+                return await ctx.send('**:bangbang: ERROR :bangbang:**\nThat is not a valid number!')
             amount_to_purge = int(channel) + 1
             await ctx.channel.purge(limit=amount_to_purge)
             if int(channel) == 1:
