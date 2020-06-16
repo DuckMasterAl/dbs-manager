@@ -3,7 +3,7 @@ from discord.ext import commands
 error_icon = 'https://cdn.discordapp.com/emojis/678014140203401246.png?v=1'
 Client = discord.Client()
 
-initial_extensions = ['admin', 'moderation', 'misc']
+initial_extensions = ['admin', 'moderation', 'misc', 'special']
 
 File = open('info.json', 'r').read()# You may need to put the full path to the file here.
 data = json.loads(File)
