@@ -27,7 +27,7 @@ async def on_ready():
     # (activity=discord.Streaming(name="My Stream", url=my_twitch_url))
     # (activity=discord.Activity(type=discord.ActivityType.listening, name="a song"))
     # (activity=discord.Activity(type=discord.ActivityType.watching, name="a movie"))
-    await client.change_presence(activity=discord.Game(type=0, name=f'with Bots and New Code :robot:'), status=discord.Status.online)
+    await client.change_presence(activity=discord.Game(type=0, name=f'with Code'), status=discord.Status.online)
     print(f'"{client.user.name}" is ready to use.')
 
 @client.event
