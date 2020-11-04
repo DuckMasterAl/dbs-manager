@@ -1,4 +1,4 @@
-# discord-bot-shop
+# dbs-manager
 This bot was made for a Discord Bot Shop owned by me a while ago. This code is bad and **heavily** outdated.
 
 If you want a good ticket bot check out the [Quacky Support Bot.](https://github.com/quacky-bot/quacky-support)
